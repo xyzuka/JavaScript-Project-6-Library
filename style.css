@@ -1,8 +1,12 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #F8FAFC;
 }
 
 .logo-name {
@@ -12,44 +16,155 @@
 
 .header-section {
     display: grid;
-    box-shadow: 1px 4px 5px #bebebe;
+    background-color: #0F172A;
+    color: #F8FAFC;
+    box-shadow: 1px 4px 5px #334155;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 150px 10px 150px;
 }
 
 .add-book-button {
     padding: 10px;
+    background-color: #F8FAFC;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 10px;
     border-style: none;
-    box-shadow: 1px 4px 5px #bebebe;
 }
 
-.add-book-button:hover {
+.add-book-button:hover,
+.button:hover {
     cursor: pointer;
 }
 
-.add-book-button:active {
+.add-book-button:active,
+.button:active {
     transform: translateX(5px);
 }
 
 .footer {
     position: absolute;
+    color: #F8FAFC;
     bottom: 0;
     width: 100%;
     padding: 10px 30px 10px 30px;
-    background:#6cf;
+    background:#F97316;
     font-size: 1rem;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-content: center;
     gap: 5px;
+    background-color: #0F172A;
 }
 
 a {
-    color: black;
+    color: #F8FAFC;
+}
+
+.book-list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 30px 150px 10px 150px;
+    gap: 20px;
+}
+
+.book-container-card {
+    background-color: white;
+    box-shadow: 1px 4px 5px #64748B;
+    border-radius: 10px;
+    border-style: none;
+    width: 300px;
+
+    padding: 20px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.book-name,
+.title-name,
+.pages {
+    font-size: 1.2rem;
+}
+
+.button {
+    margin-top: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border-style: none;
+    padding: 5px 10px 5px 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* Modal CSS */
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F8FAFC;
+    padding: 4rem;
+    border-radius: 20px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+  
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+}
+
+.close-modal {
+    font-size: 4rem;
+    color: #0F172A;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.top-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-modal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px; 
+}
+
+#checkbox-read {
+    margin-right: 5px;
+}
+
+.submit-book-button {
+    background-color: #0F172A;
+    color: #F8FAFC;
+}
+
+.modal-title {
+    font-size: 1.7rem;
 }
