@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Tracker Library</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest"/>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+    <div class="page-grid-container">
+      <div class="header-section">
+        <span class="logo-name">My Library</span>
+            <button class="add-book-button">+ Add Book</button>
+      </div>
+
+      <div class="body-section">
+
+
+        <div class="book-list-container">
+          <div class="book-container-card">
+            <div class="book-title-container">
+              <span class="title">Book Title:</span>
+              <span class="book-name">Awaken the Giant Within</span>
+            </div>
+
+            <div class="author-container">
+              <span class="title">Author:</span>
+              <span class="title-name">Tony Robbins</span>
+            </div>
+
+            <div class="pages-container">
+              <span class="title">Pages:</span>
+              <span class="pages">544</span>
+            </div>
+
+            <button class="read-button button">Read</button>
+            <button class="remove-button button">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra class called hidden to assign css to hide the modal window -->
+      <!-- <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <h1>Add new book</h1>
+        <input type="text" placeholder="Book Title" required>
+        <input type="text" placeholder="Author" required>
+        <input type="number" min="0" placeholder="Pages" required>
+        <input type="checkbox" id="checkbox-read" name="checkbox-read">  <label for="checkbox-read">Have you read it?</label>
+        <input class="submit-book-button button" type="submit" value="Submit Book">
+    </div>
+      </div>
+      <div class="overlay hidden"></div> -->
+
+      <footer class="footer">
+        Copyright © 2022 <a href="https://github.com/xyzuka"> xyzuka</a>
+    </footer>
+
+    </div>
+
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="script.js"
+    ></script>
+  </body>
+</html>
