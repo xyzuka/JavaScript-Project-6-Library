@@ -119,6 +119,14 @@ a {
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 10;
 }
+
+.read-button-green {
+    background-color: #BEF264;
+}
+
+.unread-button-red {
+    background-color: #FCA5A5;
+}
   
 .overlay {
     position: absolute;

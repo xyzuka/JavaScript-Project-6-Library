@@ -1,7 +1,6 @@
 'use strict';
 
 // MODAL WINDOW FUNCTIONALITY
-
 // Caching DOM elements
 const show_modal = document.querySelectorAll(".add-book-button");
 const modal = document.querySelector(".modal");
@@ -37,3 +36,5 @@ document.addEventListener('keydown', function(e) {
         closeModal();
     }
 })
+
+// OBJECT ORIENTED PROGRAMMING LOGIC
