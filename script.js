@@ -38,3 +38,32 @@ document.addEventListener('keydown', function(e) {
 })
 
 // OBJECT ORIENTED PROGRAMMING LOGIC
+const submit_button = document.querySelectorAll(".submit-book-button");
+const title_value =  document.getElementById('Title').value;
+const author_value = document.getElementById('Author').value;
+const pages_value = document.getElementById('Pages').value;
+
+let myLibrary = [];
+
+function Book() {
+  // the constructor...
+}
+
+const addBookToLibrary = (e) => {
+    e.preventDefault(); // stops the form submitting
+
+    let Book = {
+        title: title_value,
+        author: author_value,
+        pages: pages_value
+    }
+
+    myLibrary.push(Book);
+    closeModal();
+}
+
+// Submit button click listener
+for (let i = 0; i < submit_button.length; i++) {
+    submit_button[i].addEventListener('click', addBookToLibrary);
+}
+

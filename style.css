@@ -16,7 +16,7 @@ body {
 
 .header-section {
     display: grid;
-    background-color: #0F172A;
+    background-color: #0EA5E9;
     color: #F8FAFC;
     box-shadow: 1px 4px 5px #334155;
     display: flex;
@@ -46,18 +46,17 @@ body {
 
 .footer {
     position: absolute;
+    background-color: #0EA5E9;
     color: #F8FAFC;
     bottom: 0;
     width: 100%;
     padding: 10px 30px 10px 30px;
-    background:#F97316;
     font-size: 1rem;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-content: center;
     gap: 5px;
-    background-color: #0F172A;
 }
 
 a {
@@ -169,7 +168,7 @@ input {
 }
 
 .submit-book-button {
-    background-color: #0F172A;
+    background-color: #0EA5E9;
     color: #F8FAFC;
 }
 
