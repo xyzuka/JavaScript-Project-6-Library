@@ -113,7 +113,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #F8FAFC;
-    padding: 4rem;
+    padding: 1rem 5rem 3rem 5rem;
     border-radius: 20px;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 10;
@@ -156,6 +156,12 @@ a {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 input {

@@ -1,12 +1,20 @@
 'use strict';
 
-// MODAL WINDOW FUNCTIONALITY
-// Caching DOM elements
+// CACHING DOM ELEMENTS
+const form = document.getElementById("form");
 const show_modal = document.querySelectorAll(".add-book-button");
 const modal = document.querySelector(".modal");
 const close_modal = document.querySelector(".close-modal");
 const overlay = document.querySelector(".overlay");
+const submit_button = document.querySelectorAll(".submit-book-button");
 
+const title = document.getElementById('Title').value;
+const author = document.getElementById('Author').value;
+const pages = document.getElementById('Pages').value;
+const read = document.getElementById('checkbox-read').checked;
+const inputs = document.querySelectorAll('#Title, #Author, #Pages');
+
+// MODAL WINDOW FUNCTIONALITY
 //Function that opens the modal
 const openModal = function() {
     modal.classList.remove('hidden');
@@ -38,24 +46,35 @@ document.addEventListener('keydown', function(e) {
 })
 
 // OBJECT ORIENTED PROGRAMMING LOGIC
-const submit_button = document.querySelectorAll(".submit-book-button");
-const title_value =  document.getElementById('Title').value;
-const author_value = document.getElementById('Author').value;
-const pages_value = document.getElementById('Pages').value;
+// EVENT: ADD A BOOK
+let myLibrary = [
+    {
+        title: 'Awaken the Giant Within',
+        author: 'Tony Robbins',
+        pages: 544,
+        read: true
+    },
 
-let myLibrary = [];
+    {
+        title: 'The Laws of Human Nature',
+        author: 'Robert Greene',
+        pages: 588,
+        read: false
+    }
+];
 
 function Book() {
   // the constructor...
 }
 
 const addBookToLibrary = (e) => {
-    e.preventDefault(); // stops the form submitting
+    e.preventDefault(); // prevents page reload when submitting a form
 
     let Book = {
-        title: title_value,
-        author: author_value,
-        pages: pages_value
+        title: document.getElementById('Title').value,
+        author: document.getElementById('Author').value,
+        pages: document.getElementById('Pages').value,
+        read: document.getElementById('checkbox-read').checked
     }
 
     myLibrary.push(Book);
@@ -63,7 +82,26 @@ const addBookToLibrary = (e) => {
 }
 
 // Submit button click listener
-for (let i = 0; i < submit_button.length; i++) {
-    submit_button[i].addEventListener('click', addBookToLibrary);
-}
+form.addEventListener('submit', (e) => {    
+    e.preventDefault(); 
+    addBookToLibrary(e); // sends data to myLibrary
+    form.reset(); // resets the form when submitted 
+})
 
+
+// EVENT: REMOVE A BOOK
+
+
+// EVENT: MARKING A BOOK AS READ
+
+
+// BOOK CLASS: REPRESENTS A BOOK
+
+
+// UI CLASS: HANDLE UI TASKS
+
+
+// STORE CLASS: HANDLES STORAGE
+
+
+// EVENT: DISPLAY BOOKS
