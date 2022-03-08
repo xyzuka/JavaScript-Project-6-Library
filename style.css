@@ -76,7 +76,6 @@ a {
   border-radius: 10px;
   border-style: none;
   width: 300px;
-
   padding: 20px;
 }
 
@@ -180,4 +179,10 @@ input {
 
 .modal-title {
   font-size: 1.7rem;
+}
+
+/* Extra styling */
+.buttons-container {
+  display: flex;
+  gap: 5px;
 }
