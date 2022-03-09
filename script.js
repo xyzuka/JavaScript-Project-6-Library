@@ -49,6 +49,23 @@ class Book {
   }
 }
 
+// Default book storage
+let myLibrary = [
+  {
+    title: "Awaken the Giant Within",
+    author: "Tony Robbins",
+    pages: 544,
+    read: true,
+  },
+
+  {
+    title: "The Laws of Human Nature",
+    author: "Robert Greene",
+    pages: 588,
+    read: false,
+  },
+];
+
 // UI
 
 // Adds newly submitted book to display
@@ -100,21 +117,21 @@ const createBookDisplay = (book) => {
   pagesTitle.classList.add("title");
   pages.classList.add("pages");
 
-  buttonsContainer.classList.add("buttons-container");  
-  // Read or unread button logic and CSS
+  buttonsContainer.classList.add("buttons-container");
+  // Read or unread button
   if (book.read) {
     readButton.classList.add("read-button-green");
     readButton.classList.add("button");
-    readButton.textContent = 'Read';
+    readButton.textContent = "Read";
   } else {
     readButton.classList.add("unread-button-red");
     readButton.classList.add("button");
-    readButton.textContent = 'Unread';
+    readButton.textContent = "Unread";
   }
 
-  // Remove button functionality
+  // Remove button
   removeButton.classList.add("button");
-  removeButton.textContent = 'Remove';
+  removeButton.textContent = "Remove";
 
   // Appending newly created book spans
   bookContainer.appendChild(bookTitleContainer);
@@ -135,23 +152,6 @@ const createBookDisplay = (book) => {
 
   bookListContainer.appendChild(bookContainer);
 };
-
-// Default book storage
-let myLibrary = [
-  {
-    title: "Awaken the Giant Within",
-    author: "Tony Robbins",
-    pages: 544,
-    read: true,
-  },
-
-  {
-    title: "The Laws of Human Nature",
-    author: "Robert Greene",
-    pages: 588,
-    read: false,
-  },
-];
 
 const addBookToLibrary = (e) => {
   e.preventDefault(); // prevents page reload when submitting a form
@@ -176,3 +176,17 @@ form.addEventListener("submit", (e) => {
 });
 
 updateBooksDisplay();
+
+// Read or unread button toggle
+const toggleReadButton = document.querySelector(".read-button-green");
+const toggleUnreadButton = document.querySelector(".unread-button-red");
+
+toggleReadButton.addEventListener("click", toggleToUnread);
+function toggleToUnread() {
+  console.log("green");
+}
+
+toggleUnreadButton.addEventListener("click", toggleToRead);
+function toggleToRead() {
+  console.log("red");
+}
