@@ -1,6 +1,6 @@
 "use strict";
 
-// MODAL WINDOW
+// Modal window
 
 const show_modal = document.querySelectorAll(".add-book-button");
 const modal = document.querySelector(".modal");
@@ -31,15 +31,11 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// DATA STRUCTURES AND ALGO
+// Data Structures and Algo
 
-const form = document.getElementById("form");
-const submit_button = document.querySelectorAll(".submit-book-button");
-const title = document.getElementById("Title").value;
-const author = document.getElementById("Author").value;
-const pages = document.getElementById("Pages").value;
-const read = document.getElementById("checkbox-read").checked;
+// Default book storage
 
+// Book class: Represents a book
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -49,7 +45,7 @@ class Book {
   }
 }
 
-// Default book storage
+// Hard coded default display books
 let myLibrary = [
   {
     title: "Awaken the Giant Within",
@@ -66,127 +62,137 @@ let myLibrary = [
   },
 ];
 
-// UI
-
-// Adds newly submitted book to display
-const updateBooksDisplay = () => {
-  for (let i = 0; i < myLibrary.length; i++) {
-    createBookDisplay(myLibrary[i]);
-  }
-};
-
-// Creates book DOM element when updating book display
-const createBookDisplay = (book) => {
-  // Creating a card (without styling)
-  const bookListContainer = document.querySelector(".book-list-container");
-  const bookContainer = document.createElement("div");
-  const bookTitleContainer = document.createElement("div");
-  const bookTitle = document.createElement("span");
-  const bookName = document.createElement("span");
-  const authorContainer = document.createElement("div");
-  const authorTitle = document.createElement("span");
-  const authorName = document.createElement("span");
-  const pagesContainer = document.createElement("div");
-  const pagesTitle = document.createElement("span");
-  const pages = document.createElement("span");
-  const buttonsContainer = document.createElement("div");
-  const readButton = document.createElement("button");
-  const removeButton = document.createElement("button");
-
-  // Adding styles to the card
-  bookContainer.classList.add("book-container-card");
-  bookTitle.textContent = "Book Title:";
-
-  bookTitleContainer.classList.add("book-title-container");
-
-  bookName.textContent = ` ${book.title}`;
-  bookTitle.classList.add("title");
-  bookName.classList.add("book-name");
-
-  authorContainer.classList.add("author-container");
-
-  authorTitle.textContent = "Author:";
-  authorName.textContent = ` ${book.author}`;
-  authorTitle.classList.add("title");
-  authorName.classList.add("title-name");
-
-  pagesContainer.classList.add("pages-container");
-
-  pagesTitle.textContent = "Pages:";
-  pages.textContent = ` ${book.pages}`;
-  pagesTitle.classList.add("title");
-  pages.classList.add("pages");
-
-  buttonsContainer.classList.add("buttons-container");
-  // Read or unread button
-  if (book.read) {
-    readButton.classList.add("read-button-green");
-    readButton.classList.add("button");
-    readButton.textContent = "Read";
-  } else {
-    readButton.classList.add("unread-button-red");
-    readButton.classList.add("button");
-    readButton.textContent = "Unread";
+// UI class: Handles UI class
+class UI {
+  static updateDisplay() {
+    myLibrary.forEach((book) => UI.addBookToDisplay(book));
   }
 
-  // Remove button
-  removeButton.classList.add("button");
-  removeButton.textContent = "Remove";
+  static addBookToDisplay(book) {
+    // Creating a card (without styling)
+    const bookListContainer = document.querySelector(".book-list-container");
+    const bookContainer = document.createElement("div");
+    const bookTitleContainer = document.createElement("div");
+    const bookTitle = document.createElement("span");
+    const bookName = document.createElement("span");
+    const authorContainer = document.createElement("div");
+    const authorTitle = document.createElement("span");
+    const authorName = document.createElement("span");
+    const pagesContainer = document.createElement("div");
+    const pagesTitle = document.createElement("span");
+    const pages = document.createElement("span");
+    const buttonsContainer = document.createElement("div");
+    const readButton = document.createElement("button");
+    const removeButton = document.createElement("button");
 
-  // Appending newly created book spans
-  bookContainer.appendChild(bookTitleContainer);
-  bookTitleContainer.appendChild(bookTitle);
-  bookTitleContainer.appendChild(bookName);
+    // Adding styles to the card
+    bookContainer.classList.add("book-container-card");
+    bookTitle.textContent = "Book Title:";
 
-  bookContainer.appendChild(authorContainer);
-  authorContainer.appendChild(authorTitle);
-  authorContainer.appendChild(authorName);
+    bookTitleContainer.classList.add("book-title-container");
 
-  bookContainer.appendChild(pagesContainer);
-  pagesContainer.appendChild(pagesTitle);
-  pagesContainer.appendChild(pages);
+    bookName.textContent = ` ${book.title}`;
+    bookTitle.classList.add("title");
+    bookName.classList.add("book-name");
 
-  bookContainer.appendChild(buttonsContainer);
-  buttonsContainer.appendChild(readButton);
-  buttonsContainer.appendChild(removeButton);
+    authorContainer.classList.add("author-container");
 
-  bookListContainer.appendChild(bookContainer);
-};
+    authorTitle.textContent = "Author:";
+    authorName.textContent = ` ${book.author}`;
+    authorTitle.classList.add("title");
+    authorName.classList.add("title-name");
 
-const addBookToLibrary = (e) => {
-  e.preventDefault(); // prevents page reload when submitting a form
+    pagesContainer.classList.add("pages-container");
 
-  let Book = {
-    title: document.getElementById("Title").value,
-    author: document.getElementById("Author").value,
-    pages: document.getElementById("Pages").value,
-    read: document.getElementById("checkbox-read").checked,
-  };
+    pagesTitle.textContent = "Pages:";
+    pages.textContent = ` ${book.pages}`;
+    pagesTitle.classList.add("title");
+    pages.classList.add("pages");
 
-  myLibrary.push(Book);
-  closeModal();
-  //   updateBooksDisplay();
-};
+    buttonsContainer.classList.add("buttons-container");
+    // Read or unread button
+    if (book.read) {
+      readButton.classList.add("read-button-green");
+      readButton.classList.add("button");
+      readButton.textContent = "Read";
+    } else {
+      readButton.classList.add("unread-button-red");
+      readButton.classList.add("button");
+      readButton.textContent = "Unread";
+    }
 
-// Submit button click listener
+    // Read or unread button toggle
+    readButton.addEventListener("click", toggleReadButton);
+
+    function toggleReadButton() {
+        book.read = !book.read;
+        console.log(book.read);
+        
+        if (book.read === false) {
+            readButton.classList.remove("read-button-green");
+            readButton.classList.add("unread-button-red");
+            readButton.textContent = "Unread";
+        } else {
+            readButton.classList.remove("unread-button-red");
+            readButton.classList.add("read-button-green");
+            readButton.textContent = "Read";
+        }
+
+    }
+
+    // Remove button
+    removeButton.classList.add("button");
+    removeButton.classList.add("remove-button");
+    removeButton.textContent = "Remove";
+
+    // Appending newly created book spans
+    bookContainer.appendChild(bookTitleContainer);
+    bookTitleContainer.appendChild(bookTitle);
+    bookTitleContainer.appendChild(bookName);
+
+    bookContainer.appendChild(authorContainer);
+    authorContainer.appendChild(authorTitle);
+    authorContainer.appendChild(authorName);
+
+    bookContainer.appendChild(pagesContainer);
+    pagesContainer.appendChild(pagesTitle);
+    pagesContainer.appendChild(pages);
+
+    bookContainer.appendChild(buttonsContainer);
+    buttonsContainer.appendChild(readButton);
+    buttonsContainer.appendChild(removeButton);
+
+    bookListContainer.appendChild(bookContainer);
+  }
+}
+
+// Event: Add a book
 form.addEventListener("submit", (e) => {
+  // Prevent actual submit
   e.preventDefault();
-  addBookToLibrary(e); // sends data to myLibrary
-  form.reset(); // resets the form when submitted
+
+  // Get form values
+  const form = document.getElementById("form");
+  const title = document.getElementById("Title").value;
+  const author = document.getElementById("Author").value;
+  const pages = document.getElementById("Pages").value;
+  const read = document.getElementById("checkbox-read").checked;
+
+  // Instantiate new book
+  const newBook = new Book(title, author, pages, read);
+
+  // Resets form when submitted
+  form.reset();
+
+  // Sends new book to be stored in the library
+  myLibrary.push(newBook);
+
+  // Add book to UI
+  UI.addBookToDisplay(newBook);
+
+  // Closes modal
+  closeModal();
 });
 
-updateBooksDisplay();
-
-// Read or unread button toggle
-const toggleReadButton = document.querySelector(".read-button-green");
-const toggleUnreadButton = document.querySelector(".unread-button-red");
-
-toggleReadButton.addEventListener("click", toggleToUnread);
-function toggleToUnread() {
-  console.log("green");
-}
-
-toggleUnreadButton.addEventListener("click", toggleToRead);
-function toggleToRead() {
-  console.log("red");
-}
+// Event: Displays books
+UI.updateDisplay();

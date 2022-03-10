@@ -11,7 +11,7 @@ body {
 
 .logo-name {
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .header-section {
@@ -65,7 +65,7 @@ a {
 
 .book-list-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 30px 150px 10px 150px;
   gap: 20px;
 }
