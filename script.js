@@ -34,17 +34,6 @@ document.addEventListener("keydown", function (e) {
 // Data Structures and Algo
 
 // Default book storage
-
-// Book class: Represents a book
-class Book {
-  constructor(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-  }
-}
-
 // Hard coded default display books
 let myLibrary = [
   {
@@ -62,10 +51,22 @@ let myLibrary = [
   },
 ];
 
-// UI class: Handles UI class
+// Book class: Represents a book
+class Book {
+    constructor(title, author, pages, read) {
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.read = read;
+    }
+}
+
+// UI class
 class UI {
   static updateDisplay() {
-    myLibrary.forEach((book) => UI.addBookToDisplay(book));
+    for (let i = 0; i < myLibrary.length; i++) {
+      this.addBookToDisplay(myLibrary[i]);
+    }
   }
 
   static addBookToDisplay(book) {
@@ -87,6 +88,7 @@ class UI {
 
     // Adding styles to the card
     bookContainer.classList.add("book-container-card");
+    bookContainer.setAttribute("id", myLibrary.indexOf(book));
     bookTitle.textContent = "Book Title:";
 
     bookTitleContainer.classList.add("book-title-container");
@@ -121,30 +123,6 @@ class UI {
       readButton.textContent = "Unread";
     }
 
-    // Read or unread button toggle
-    readButton.addEventListener("click", toggleReadButton);
-
-    function toggleReadButton() {
-        book.read = !book.read;
-        console.log(book.read);
-        
-        if (book.read === false) {
-            readButton.classList.remove("read-button-green");
-            readButton.classList.add("unread-button-red");
-            readButton.textContent = "Unread";
-        } else {
-            readButton.classList.remove("unread-button-red");
-            readButton.classList.add("read-button-green");
-            readButton.textContent = "Read";
-        }
-
-    }
-
-    // Remove button
-    removeButton.classList.add("button");
-    removeButton.classList.add("remove-button");
-    removeButton.textContent = "Remove";
-
     // Appending newly created book spans
     bookContainer.appendChild(bookTitleContainer);
     bookTitleContainer.appendChild(bookTitle);
@@ -163,6 +141,44 @@ class UI {
     buttonsContainer.appendChild(removeButton);
 
     bookListContainer.appendChild(bookContainer);
+
+     // Event: Read or unread status changed
+     readButton.addEventListener("click", toggleReadButton);
+
+     function toggleReadButton() {
+       book.read = !book.read;
+       // console.log(book.read);
+ 
+       if (book.read === false) {
+         readButton.classList.remove("read-button-green");
+         readButton.classList.add("unread-button-red");
+         readButton.textContent = "Unread";
+       } else {
+         readButton.classList.remove("unread-button-red");
+         readButton.classList.add("read-button-green");
+         readButton.textContent = "Read";
+       }
+     }
+ 
+     // Remove button
+     removeButton.classList.add("button");
+     removeButton.classList.add("remove-button");
+     removeButton.textContent = "Remove";
+ 
+     // Event: Removes a book
+     removeButton.addEventListener("click", RemoveButton);
+ 
+     function RemoveButton() {
+       // removes book at specific location
+       // splice method removes or adds from a array - splice(start, deleteCount)
+       // indexOf - method that returns the first index at which a given element can be found in the array
+       myLibrary.splice(myLibrary.indexOf(book), 1);
+       UI.removeBookFromDisplay();
+     }
+  }
+
+  static removeBookFromDisplay() {
+
   }
 }
 
@@ -196,3 +212,14 @@ form.addEventListener("submit", (e) => {
 
 // Event: Displays books
 UI.updateDisplay();
+
+// Local Storage: Sending myLibrary to l   ocal storage
+function sendData() {
+
+}
+
+// Local Storage: Pulls data from myLibrary when page is refreshed
+function restoreData() {
+
+}
+
