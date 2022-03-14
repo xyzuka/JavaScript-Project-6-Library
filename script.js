@@ -53,12 +53,12 @@ let myLibrary = [
 
 // Book class: Represents a book
 class Book {
-    constructor(title, author, pages, read) {
-      this.title = title;
-      this.author = author;
-      this.pages = pages;
-      this.read = read;
-    }
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 // UI class
@@ -88,11 +88,10 @@ class UI {
 
     // Adding styles to the card
     bookContainer.classList.add("book-container-card");
-    bookContainer.setAttribute("id", myLibrary.indexOf(book));
-    bookTitle.textContent = "Book Title:";
 
     bookTitleContainer.classList.add("book-title-container");
 
+    bookTitle.textContent = "Book Title:";
     bookName.textContent = ` ${book.title}`;
     bookTitle.classList.add("title");
     bookName.classList.add("book-name");
@@ -142,43 +141,45 @@ class UI {
 
     bookListContainer.appendChild(bookContainer);
 
-     // Event: Read or unread status changed
-     readButton.addEventListener("click", toggleReadButton);
+    // Event: Read or unread status changed
+    readButton.addEventListener("click", toggleReadButton);
 
-     function toggleReadButton() {
-       book.read = !book.read;
-       // console.log(book.read);
- 
-       if (book.read === false) {
-         readButton.classList.remove("read-button-green");
-         readButton.classList.add("unread-button-red");
-         readButton.textContent = "Unread";
-       } else {
-         readButton.classList.remove("unread-button-red");
-         readButton.classList.add("read-button-green");
-         readButton.textContent = "Read";
-       }
-     }
- 
-     // Remove button
-     removeButton.classList.add("button");
-     removeButton.classList.add("remove-button");
-     removeButton.textContent = "Remove";
- 
-     // Event: Removes a book
-     removeButton.addEventListener("click", RemoveButton);
- 
-     function RemoveButton() {
-       // removes book at specific location
-       // splice method removes or adds from a array - splice(start, deleteCount)
-       // indexOf - method that returns the first index at which a given element can be found in the array
-       myLibrary.splice(myLibrary.indexOf(book), 1);
-       UI.removeBookFromDisplay();
-     }
+    function toggleReadButton() {
+      book.read = !book.read;
+      // console.log(book.read);
+
+      if (book.read === false) {
+        readButton.classList.remove("read-button-green");
+        readButton.classList.add("unread-button-red");
+        readButton.textContent = "Unread";
+      } else {
+        readButton.classList.remove("unread-button-red");
+        readButton.classList.add("read-button-green");
+        readButton.textContent = "Read";
+      }
+    }
+
+    // Remove button
+    removeButton.classList.add("button");
+    removeButton.classList.add("remove-button");
+    removeButton.textContent = "Remove";
+
+    // Event: Removes a book
+    removeButton.addEventListener("click", removeBook);
+
+    // Removes selected book from the storage array
+    function removeBook() {
+      myLibrary.splice(myLibrary.indexOf(book), 1);
+      UI.resetDisplay();
+    }
   }
 
-  static removeBookFromDisplay() {
-
+  // Resets the DOM by deleting ALL child elements and "resets" the display
+  static resetDisplay() {
+    const bookListContainer = document.querySelector(".book-list-container");
+    // remove everything in the parent container to re-run updateDisplay
+    bookListContainer.querySelectorAll('*').forEach(n => n.remove());
+    UI.updateDisplay(myLibrary);
   }
 }
 
@@ -197,14 +198,17 @@ form.addEventListener("submit", (e) => {
   // Instantiate new book
   const newBook = new Book(title, author, pages, read);
 
-  // Resets form when submitted
-  form.reset();
-
   // Sends new book to be stored in the library
   myLibrary.push(newBook);
 
+  // Resets form when submitted
+  form.reset();
+
   // Add book to UI
   UI.addBookToDisplay(newBook);
+
+  // Send data to local storage
+  sendData(newBook);
 
   // Closes modal
   closeModal();
@@ -213,13 +217,24 @@ form.addEventListener("submit", (e) => {
 // Event: Displays books
 UI.updateDisplay();
 
-// Local Storage: Sending myLibrary to l   ocal storage
+// Local Storage: Sending myLibrary to local storage
 function sendData() {
-
+  // to store an entire javascript object, we need to convert it to strings with JSON.stringify
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
+
+// Local Storage: Removing item from local storage when remove is clicked
+function removeData() {}
 
 // Local Storage: Pulls data from myLibrary when page is refreshed
 function restoreData() {
-
+  // retrieving object from the storage and converting it to an object with JSON.parse
+  if (localStorage.myLibrary) {
+    let books = JSON.parse(localStorage.getItem(`myLibrary`));
+    console.table(books);
+    UI.addBookToDisplay(books);
+  }
+  return;
 }
 
+// restoreData();
