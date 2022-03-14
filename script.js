@@ -146,7 +146,7 @@ class UI {
 
     function toggleReadButton() {
       book.read = !book.read;
-      // console.log(book.read);
+      sendData(myLibrary);
 
       if (book.read === false) {
         readButton.classList.remove("read-button-green");
@@ -170,6 +170,7 @@ class UI {
     // Removes selected book from the storage array
     function removeBook() {
       myLibrary.splice(myLibrary.indexOf(book), 1);
+      sendData(myLibrary);
       UI.resetDisplay();
     }
   }
@@ -178,8 +179,8 @@ class UI {
   static resetDisplay() {
     const bookListContainer = document.querySelector(".book-list-container");
     // remove everything in the parent container to re-run updateDisplay
-    bookListContainer.querySelectorAll('*').forEach(n => n.remove());
-    UI.updateDisplay(myLibrary);
+    bookListContainer.querySelectorAll('*').forEach(bookContainer => bookContainer.remove());
+    UI.updateDisplay();
   }
 }
 
@@ -223,18 +224,15 @@ function sendData() {
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
-// Local Storage: Removing item from local storage when remove is clicked
-function removeData() {}
-
 // Local Storage: Pulls data from myLibrary when page is refreshed
 function restoreData() {
-  // retrieving object from the storage and converting it to an object with JSON.parse
+  // if there is any object in local storage, the object will be restored with JSON.parse and is reassigned to the library
   if (localStorage.myLibrary) {
     let books = JSON.parse(localStorage.getItem(`myLibrary`));
-    console.table(books);
-    UI.addBookToDisplay(books);
+    myLibrary = books;
+    // resets the DOM to display the books stored in local storage
+    UI.resetDisplay();
   }
-  return;
 }
 
-// restoreData();
+restoreData();

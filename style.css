@@ -65,7 +65,7 @@ a {
 
 .book-list-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   margin: 30px 150px 10px 150px;
   gap: 20px;
 }
@@ -75,7 +75,7 @@ a {
   box-shadow: 1px 4px 5px #64748b;
   border-radius: 10px;
   border-style: none;
-  width: 300px;
+  width: 400px;
   padding: 20px;
 }
 
